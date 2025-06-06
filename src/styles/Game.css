@@ -6,11 +6,41 @@
     color: black;
 }
 
+.blurred {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
 .nav-bar {
     width: 100%;
     height: 60px;
     text-align: center;
     margin-top: -50px;
+}
+
+.nav-line{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.game-logo {
+    width: 4%;
+    height: auto;
+    background-color: white;
+    border-radius: 7px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.return-home-button {
+    margin-right: 15px;
+    outline: none;
+    border: none;
 }
 
 .game-board {
@@ -21,6 +51,9 @@
     font-size: 2.5rem;
     font-family: 'sans-serif', 'helvetica';
     margin: 1%;
+        position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .hor-line{
@@ -39,9 +72,6 @@
     width: 60px;
     height: 60px;
     background-color: white;
-    border-color: black;
-    border-style: solid;
-    border-width: 2px;
     font-weight: bold;
 }
 
@@ -81,7 +111,7 @@
 }
 
 .gr{
-    background-color: green;
+    background-color: rgb(31, 178, 31);
     color: white;
 }
 
@@ -94,3 +124,68 @@
     background-color: gray;
     color: white;
 }
+
+.keyboard-key.gr {
+  background-color: rgb(31, 178, 31);
+  color: white;
+}
+
+.keyboard-key.y {
+  background-color: rgb(236, 236, 68);
+  color: white;
+}
+
+.keyboard-key.g {
+  background-color: gray;
+  color: white;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Popup styling */
+.game-over-message {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 11;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.game-over-message button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: rgb(229, 229, 229);
+}
+
+.play-again-btn:focus, .play-again-btn:hover {
+    outline: 2px solid #aaa; /* subtle gray ring */
+    outline-offset: 2px;
+}
+
+@keyframes bounce {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.2); }
+  60%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.winning-row .game-cell {
+  animation: bounce 0.6s ease;
+  animation-delay: calc(0.1s * var(--i));
+  animation-fill-mode: both;
+} 
