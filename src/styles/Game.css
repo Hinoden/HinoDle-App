@@ -32,12 +32,17 @@
 }
 
 .game-cell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
     width: 60px;
     height: 60px;
     background-color: white;
     border-color: black;
     border-style: solid;
     border-width: 2px;
+    font-weight: bold;
 }
 
 .game-row{
@@ -66,4 +71,26 @@
     height: 60px;
     font-weight: bold;
     font-size: 1.1rem;
+    border: none;
+    outline: none;
+}
+
+.keyboard-key:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.gr{
+    background-color: green;
+    color: white;
+}
+
+.y{
+    background-color: rgb(236, 236, 68);
+    color: white;
+}
+
+.g{
+    background-color: gray;
+    color: white;
 }
