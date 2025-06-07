@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import logo from '../assets/Wordle_Logo.svg.png';
 import '../styles/Game.css';
 
+type LetterColor = 'gr' | 'y' | 'g' | '';
+
 function Game() {
     const emptyBoard = Array(6).fill(null).map(() => Array(5).fill(''));
     const [board, setBoard] = useState(emptyBoard);
@@ -11,9 +13,9 @@ function Game() {
     const [results, setResults] = useState(Array(6).fill(null));
     const [gameOver, setGameOver] = useState(false);
     const [isWin, setIsWin] = useState(false);
-    const [winningRow, setWinningRow] = useState(null);
+    const [winningRow, setWinningRow] = useState<number| null>(null);
     const [secretWord, setSecretWord] = useState('');
-    const [letterStatus, setLetterStatus] = useState({});
+    const [letterStatus, setLetterStatus] = useState<{[key: string]: LetterColor }>({});
     const wordList = [
         "aback",
         "abase",
@@ -2331,7 +2333,7 @@ function Game() {
         navigate('/');
     };
 
-    const handleKeyClick = (letter) => {
+    const handleKeyClick = (letter: string) => {
         if (gameOver) return;
         else if (letter === 'DELETE'){
             if (currentTile > 0){
@@ -2349,7 +2351,7 @@ function Game() {
                 newResults[currentRow] = result;
                 setResults(newResults);
 
-                const newStatus = {...letterStatus};
+                const newStatus: { [key: string]: LetterColor } = { ...letterStatus };
                 for (let i = 0; i < 5; i++){
                     const letter = guessedWord[i];
                     const color = result[i];
@@ -2359,7 +2361,6 @@ function Game() {
                         newStatus[letter] = color;
                     }
                 }
-
                 setLetterStatus(newStatus);
 
                 if (guessedWord === secretWord){
@@ -2385,16 +2386,16 @@ function Game() {
         }
     }
 
-    function checkGuess(guessedWord){
-        const result = Array(5).fill("g");
-        const secretArr = secretWord.split('');
-        const guessedArr = guessedWord.split('');
+    function checkGuess(guessedWord: string): LetterColor[]{
+        const result: LetterColor[] = Array(5).fill("g");
+        const secretArr: (string | null)[] = secretWord.split('');
+        const guessedArr: (string | null)[] = guessedWord.split('');
 
         for (let i = 0; i < 5; i++){
             if (guessedArr[i] === secretArr[i]){
                 result[i] = "gr";
-                secretArr[i] = null;
-                guessedArr[i] = null;
+                secretArr[i] = '';
+                guessedArr[i] = '';
             }
         }
 
@@ -2409,7 +2410,7 @@ function Game() {
     }
 
     useEffect(() => {
-        const handleKeyDown = (event) => {
+        const handleKeyDown = (event: KeyboardEvent) => {
             const key = event.key.toUpperCase();
             if (key === 'ENTER' || key === 'BACKSPACE' || /^[A-Z]$/.test(key)) {
                 if (key === 'BACKSPACE') {
@@ -2451,7 +2452,7 @@ function Game() {
                                 <div
                                     className={`game-cell ${colorClass}`}
                                     key={cellIndex} 
-                                    style={{'--i': cellIndex}}>
+                                    style={{'--i': cellIndex} as React.CSSProperties}>
                                     {cell}
                                 </div>
                             );
@@ -2462,7 +2463,7 @@ function Game() {
             <div className="keyboard">
                 {['QWERTYUIOP', 'ASDFGHJKL', 'ENTERZXCVBNMDELETE'].map((row, rowIndex) => (
                     <div className="keyboard-row" key={rowIndex}>
-                        {row.match(/ENTER|DELETE|[A-Z]/g).map((key) => (
+                        {(row.match(/ENTER|DELETE|[A-Z]/g) || []).map((key) => (
                             <button key={key} className={`keyboard-key ${key.length> 1 ? 'keyboard-key-wide' : ''} ${letterStatus[key]|| ''}`} onClick={()=> handleKeyClick(key)}>{key}</button>
                         ))}
                     </div>
