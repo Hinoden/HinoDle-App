@@ -2475,14 +2475,14 @@ function Game() {
             <div className="game-over-message">
                 {isWin ? (
                     <div className="winning-message">
-                        <h2>Congratulations!</h2>
-                        <p>You guessed the word!</p>
+                        <h2 className="message">Congratulations!</h2>
+                        <p className="message">You guessed the word!</p>
                         <button onClick={() => window.location.reload()} className="play-again-btn">Play Again</button>
                     </div>
                 ) : (
                     <div className="losing-message">
-                        <h2>Game Over!</h2>
-                        <p>The word was: {secretWord}</p>
+                        <h2 className="message">Game Over!</h2>
+                        <p className="message">The word was: {secretWord}</p>
                         <button onClick={() => window.location.reload()} className="play-again-btn">Play Again</button>
                     </div>
                 )}

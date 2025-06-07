@@ -170,6 +170,7 @@
   border: none;
   outline: none;
   background-color: rgb(229, 229, 229);
+  color: black;
 }
 
 .play-again-btn:focus, .play-again-btn:hover {
@@ -189,3 +190,7 @@
   animation-delay: calc(0.1s * var(--i));
   animation-fill-mode: both;
 } 
+
+.message{
+    color: black;
+}
