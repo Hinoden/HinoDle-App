@@ -2439,7 +2439,7 @@ function Game() {
                 <div className="nav-line">
                     <img src={logo} alt="Wordle Icon" className='game-logo' />
                     <h1 className="game-title">Hinodle</h1>
-                    <button className="return-home-button" onClick={handleHomeClick}>Return to Home</button>
+                    <button className="return-home-button" onClick={handleHomeClick}>Home</button>
                 </div>
                 <hr className="hor-line"/>
             </div>
